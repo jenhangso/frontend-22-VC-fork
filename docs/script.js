@@ -47,6 +47,8 @@ const body = document.body;
 const introEffectMs = 420;
 const splashCleanupMs = 380;
 
+
+
 console.log(db);
 
 function hidePlacementHint() {
@@ -78,6 +80,25 @@ function sanitizeHtml(input) {
 const nameField = document.getElementById("nameField");
 const textField = document.getElementById("textField");
 let pendingPlacement = null;
+
+// begränsar längd på texten (Elin)
+const max_text_length = 200;
+const charCount = document.getElementById("charCount");
+textField.addEventListener("input", () => {
+  if (textField.value.length > max_text_length) {
+    textField.value = textField.value.substring(0, max_text_length);
+  }
+// Uppdatera nedräkning
+  charCount.textContent = `${textField.value.length} / ${max_text_length}`;
+
+  // Röd färg om texten är nära max
+  if (textField.value.length > max_text_length - 20) {
+    charCount.style.color = "red";
+  } else {
+    charCount.style.color = "black";
+  }
+
+});
 
 function openMessageModal() {
   messageModal.classList.add("is-open");
@@ -148,8 +169,8 @@ function submitMessageAtPendingPosition() {
   if (messageValue.length === 0) {
     highlightModalInput();
     return;
+    
   }
-
   const chosenColor = headerColorInput.value;
 
   push(ref(db, "/"), {

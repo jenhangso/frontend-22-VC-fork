@@ -88,7 +88,8 @@
     <div id="message-modal" class="message-modal" aria-hidden="true">
       <div class="message-modal__card" role="dialog" aria-modal="true" aria-labelledby="message-modal-title">
         <h3 id="message-modal-title">Write your message</h3>
-        <textarea id="textField" placeholder="Type your note here..."></textarea>
+        <textarea id="textField" maxlength="200"placeholder="Type your note here..."></textarea>
+         <p id="charCount"> 0 / 200</p>
         <div class="message-modal__actions">
           <button id="modal-smiley-btn" type="button">Add Smiley 😊</button>
           <button id="modal-cancel-btn" type="button">Cancel</button>
